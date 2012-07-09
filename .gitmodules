@@ -1,0 +1,3 @@
+[submodule "Resources/Private/RestTools"]
+	path = Resources/Private/RestTools
+	url = git://git.typo3.org/Documentation/RestTools.git
