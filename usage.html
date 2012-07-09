@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>get.typo3.org</title>
+	<style type="text/css">
+		html, body {
+		}
+
+		fieldset {
+			border: 0 solid #000000;
+		}
+	</style>
+</head>
+<body style="width: 700px">
+<h1>TYPO3 Documentation Services</h1>
+
+<p>
+	Documentation of the TYPO3 is written in reStructuredText format. The reStructuredText (frequently abbreviated as reST) is a
+	lightweight markup language intended to be highly readable in source format. By the means of processors, reST
+	documentation can be rendered into various formats for printing or screen,
+	such as PDF, ePub, HTML...
+</p>
+
+<!-- ********************** -->
+<h2>Command line tool</h2>
+
+<p>
+	In a "zero config" effort, the <a href="http://forge.typo3.org/projects/team-docteam">Doc Team</a> is providing a command line
+	tool aiming to render documentation on-line without the need to install and configure the whole build chain. To download and set up the tool,
+	refer to this <a href="service-cli.html">page</a>.
+</p>
+<p>
+	 At the end of the installation, read the help from the command directly:
+
+	<pre>
+	$ get-the-docs help
+	</pre>
+
+	You will be able to generate the docs in one command.
+
+	<pre>
+	$ get-the-docs render PATH/TO/EXTENSION
+	</pre>
+
+	<a style="font-weight: bold" href="service-cli.html">read more</a>...
+</p>
+
+
+<!-- ********************** -->
+<h2>Render docs on-line</h2>
+
+<p>For casual rendering, you can make use of <a href="service-render.html">this form</a> to render a reST manual towards different formats.</p>
+
+
+<!-- ********************** -->
+<h2>Convert legacy manual.sxw</h2>
+
+<p>Legacy manual.sxw documentation can ben converted to reST on <a href="service-convert.html">this page</a>.</p>
+
+
+<!-- ********************** -->
+<h2>Local installation</h2>
+
+<p>
+	It is also possible to install the "build chain" on your local machine. Rendering on a local machine is fast and allow custom transformation.
+	Refer to <a href="http://wiki.typo3.org/ReST">our wiki</a> to get started.
+	In a nutshell, you will need to go through theses steps:
+
+<ul>
+	<li>
+		install <a href="http://sphinx.pocoo.org/">Sphinx</a>
+	</li>
+	<li>
+		install the TYPO3 theme
+	</li>
+	<li>
+		generate and configure build files
+	</li>
+</ul>
+
+</p>
+
+<!--<h2>Resources</h2>-->
+<!--<ul>-->
+	<!--<li><a href="/">ReST documentation template</a></li>-->
+	<!--<li><a href="/">Complex example (zip)</a></li>-->
+<!--</ul>-->
+</body>
+
+</html>
