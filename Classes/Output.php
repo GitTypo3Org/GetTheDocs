@@ -11,10 +11,10 @@ final class Output {
 	 */
 	static public $format = 'text';
 
-
 	/**
 	 * Output message.
 	 *
+	 * @param string $message
 	 * @return void
 	 */
 	static public function write($message = '') {

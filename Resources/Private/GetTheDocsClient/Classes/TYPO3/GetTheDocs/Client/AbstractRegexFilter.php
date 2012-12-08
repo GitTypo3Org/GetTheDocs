@@ -1,9 +1,10 @@
 <?php
+namespace TYPO3\GetTheDocs\Client;
 
 /**
  * Abstract Class for filtering file resource
  */
-abstract class AbstractRegexFilter extends RecursiveRegexIterator {
+abstract class AbstractRegexFilter extends \RecursiveRegexIterator {
 
 	/**
 	 * @var string
@@ -13,10 +14,10 @@ abstract class AbstractRegexFilter extends RecursiveRegexIterator {
 	/**
 	 * Constructor
 	 *
-	 * @param RecursiveIterator $iterator
+	 * @param \RecursiveIterator $iterator
 	 * @param string $regex
 	 */
-	public function __construct(RecursiveIterator $iterator, $regex) {
+	public function __construct(\RecursiveIterator $iterator, $regex) {
 		$this->regex = $regex;
 		parent::__construct($iterator, $regex);
 	}

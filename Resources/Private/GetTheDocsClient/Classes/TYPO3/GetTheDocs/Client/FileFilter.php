@@ -1,9 +1,10 @@
 <?php
+namespace TYPO3\GetTheDocs\Client;
 
 /**
  * Filter File according to a regex
  */
-class FileFilter extends AbstractRegexFilter {
+class FileFilter extends \TYPO3\GetTheDocs\Client\AbstractRegexFilter {
 
 	/**
 	 * Filter files against the regex

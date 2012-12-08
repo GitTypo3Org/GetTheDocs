@@ -1,4 +1,6 @@
 <?php
+namespace TYPO3\GetTheDocs\Client;
+
 /**
  * Console helper
  */
@@ -102,24 +104,26 @@ class Console {
 	static public function execute($commands) {
 
 		$result = array();
-			// dryRun will output the message
-			if (is_string($commands)) {
-				$commands = array($commands);
-			}
 
-			foreach ($commands as $command) {
-				if (self::$dryRun) {
-					self::output($command);
-				} else {
-					system($command, $result);
-				}
+		// dryRun will output the message
+		if (is_string($commands)) {
+			$commands = array($commands);
+		}
+
+		foreach ($commands as $command) {
+			if (self::$dryRun) {
+				self::output($command);
+			} else {
+				system($command, $result);
 			}
+		}
 		return $result;
 	}
 
 	/**
 	 * Output debug message on the console.
 	 *
+	 * @param string $message
 	 * @return void
 	 */
 	static public function output($message = '') {

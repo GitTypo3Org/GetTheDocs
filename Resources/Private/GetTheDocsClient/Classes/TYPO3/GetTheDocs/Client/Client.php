@@ -1,4 +1,6 @@
 <?php
+namespace TYPO3\GetTheDocs\Client;
+
 /**
  * Worker class to make the job done!
  */
@@ -17,7 +19,7 @@ class Client {
 		}
 		else {
 			$action = $arguments[1];
-			$className = 'Client' . ucfirst($action);
+			$className = 'TYPO3\GetTheDocs\Client\Client' . ucfirst($action);
 			if (class_exists($className)) {
 				array_shift($arguments); // we don't need that one
 				$class = new $className($arguments);
@@ -45,10 +47,14 @@ EOF;
 Toolbox for managing TYPO3 documentation
 
 Usage:
-	get-the-docs render     Render documentation remotely
+	get-the-docs render     Render reST documentation remotely
 	get-the-docs convert    Convert legacy OpenOffice documentation to reST
-	get-the-docs config     Download configuration for local rendering (Working but still missing features...)
+	get-the-docs config     Download configuration for local rendering (Experimental!)
 	get-the-docs help       Print this help
+
+Add option --help to get more usage of a particular action. E.g.
+
+    get-the-docs render --help
 
 EOF;
 		print $usage;

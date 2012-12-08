@@ -30,15 +30,18 @@ class Server {
 				$agent = new ServerConvert($parameters, $files);
 				break;
 			default:
-				$message = <<< EOF
-I don't know action: "$action". API problem?
-
-EOF;
+				$message = "I don't know action: '{$parameters['action']}' API problem?";
 				print $message;
 				die();
 		}
 
-		$agent->process();
+		try {
+			$agent->process();
+		}
+		catch(Exception $e) {
+			print $e->getMessage();
+		}
+
 	}
 }
 

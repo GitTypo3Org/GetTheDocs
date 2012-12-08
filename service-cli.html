@@ -22,12 +22,13 @@ This script will help you in generating TYPO3 documentation from the command lin
 <h3>Installation</h3>
 
 <p>
-	Download <a href="http://forge.typo3.org/projects/team-docteam">the script</a> somewhere in your system. On a *nix system, it
+	Download <a href="http://docs.typo3.org/getthedocs/download.php">the script</a> somewhere in your system. On a *nix system, it
 	can be achieved from the command line with:
 <pre>
 	cd PATH
-	curl -s http://preview.docs.typo3.org/getthedocs/get-the-docs.php > get-the-docs;
-	chmod 755 get-the-docs
+	curl -s http://docs.typo3.org/getthedocs/download.php > get-the-docs.phar;
+	chmod 755 get-the-docs.phar
+	./get-the-docs.phar
 </pre>
 <p>
 	<span style="text-decoration: underline">Tip</span>: putting the script somewhere in your PATH (e.g /usr/bin/) would make the
@@ -37,7 +38,7 @@ This script will help you in generating TYPO3 documentation from the command lin
 <h3>Requirement</h3>
 
 <p>
-	The script requires PHP 5.2 and above with Zip support enabled
+	The script requires PHP 5.3 and above with Zip support enabled
 	which is often provided by package "php5-zip".
 	To verify its support, type in a terminal.
 <pre>
@@ -47,15 +48,15 @@ This script will help you in generating TYPO3 documentation from the command lin
 <h3>Usage</h3>
 
 <pre>
-	$ get-the-docs help
+	$ get-the-docs.phar help
 
 	Toolbox for managing TYPO3 documentation
 
 	Usage:
-		get-the-docs render     Render documentation remotely
-		get-the-docs convert    Convert legacy OpenOffice documentation to reST
-		get-the-docs config     Download configuration for local rendering (Working but still missing features...)
-		get-the-docs help       Print this help
+		get-the-docs.phar render     Render documentation remotely
+		get-the-docs.phar convert    Convert legacy OpenOffice documentation to reST
+		get-the-docs.phar config     Download configuration for local rendering (Working but still missing features...)
+		get-the-docs.phar help       Print this help
 </pre>
 <h3>Source code</h3>
 
@@ -63,6 +64,11 @@ This script will help you in generating TYPO3 documentation from the command lin
 	The project will be put on <a href="http://forge.typo3.org/projects/team-docteam">Forge</a> in a near future to welcome
 	contributions.
 </p>
+
+<h3 id="trouble">Trouble shooting</h3>
+
+<p>Please report any trouble you may encounter to the <a href="http://forge.typo3.org/projects/get-the-docs/issues">bug
+	tracker</a>.</p>
 
 
 </body>

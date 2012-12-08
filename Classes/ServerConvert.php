@@ -30,11 +30,6 @@ class ServerConvert {
 	/**
 	 * @var string
 	 */
-	protected $docWorkspace = 'manual';
-
-	/**
-	 * @var string
-	 */
 	protected $homeDirectory = '';
 
 	/**
@@ -62,7 +57,7 @@ class ServerConvert {
 	 *
 	 * @param $parameters
 	 * @param $files
-	 * @return void
+	 * @return \ServerConvert
 	 */
 	public function __construct($parameters, $files) {
 		$this->parameters = $parameters;
@@ -96,9 +91,6 @@ class ServerConvert {
 		if (empty($this->file) || $this->file['error'] != 0) {
 			throw new Exception('missing file manual');
 		}
-		if ($this->parameters['user_workspace'] == '') {
-			throw new Exception('missing user_workspace parameter');
-		}
 	}
 
 	/**
@@ -108,17 +100,30 @@ class ServerConvert {
 	 */
 	 protected  function initialize() {
 
-		 $this->userWorkspace = $this->parameters['user_workspace'];
-		 $this->userWorkspacePath = FILES_DIRECTORY . "/$this->userWorkspace";
+		 $this->userWorkspacePath = FILES_DIRECTORY . "/" . $this->getWorkspace();
 		 $this->zipFile = "$this->userWorkspacePath/Documentation.zip";
 
 		 $this->homeDirectory = dirname($_SERVER['SCRIPT_FILENAME']);
-		 $this->uploadDirectory = "$this->homeDirectory/" . UPLOAD_DIRECTORY . "/$this->userWorkspace/$this->docWorkspace";
+		 $this->uploadDirectory = sprintf("%s/%s/%s",
+			 $this->homeDirectory,
+			 UPLOAD_DIRECTORY,
+			 $this->getWorkspace()
+		 );
+
 		 $this->uploadDirectoryShortPath = $this->uploadDirectory;
 		 $this->uploadDirectory .= "/Documentation/_not_versioned/_genesis"; // the conversion script is coded to have this path
 
 		 $this->manualFile = "$this->uploadDirectory/manual.sxw";
 		 $this->url = 'http://' . $_SERVER['HTTP_HOST'] . str_replace('index.php', '', $_SERVER['PHP_SELF']);
+	}
+
+	/**
+	 * Return the workspace
+	 *
+	 * @return string
+	 */
+	public function getWorkspace() {
+		return $_SERVER['REQUEST_TIME'];
 	}
 
 	/**

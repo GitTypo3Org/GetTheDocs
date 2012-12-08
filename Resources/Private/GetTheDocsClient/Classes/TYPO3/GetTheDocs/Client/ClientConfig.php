@@ -1,4 +1,6 @@
 <?php
+namespace TYPO3\GetTheDocs\Client;
+
 /**
  * Worker class to make the job done!
  */
@@ -62,12 +64,12 @@ class ClientConfig {
 			$content = trim(Request::post(HOST, $data));
 
 			if (!$content) {
-				throw new Exception("Exception: content empty for '$file'");
+				throw new \Exception("Exception: content empty for '$file'");
 			}
 
 			$result = file_put_contents("$this->directory/$file", $content);
 			if ($result === FALSE) {
-				throw new Exception("Exception: file '$file' was not written");
+				throw new \Exception("Exception: file '$file' was not written");
 			}
 			Console::output("File \"$file\" written");
 		}
@@ -112,6 +114,7 @@ EOF;
 	/**
 	 * Output a usage message on the console
 	 *
+	 * @param string $message
 	 * @return void
 	 */
 	protected function displayError($message) {

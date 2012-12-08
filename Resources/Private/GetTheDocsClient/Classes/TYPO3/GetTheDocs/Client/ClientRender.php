@@ -1,4 +1,6 @@
 <?php
+namespace TYPO3\GetTheDocs\Client;
+
 /**
  * Worker class to make the job done!
  */
@@ -49,6 +51,10 @@ class ClientRender {
 		if (! empty($this->arguments[0])) {
 			$this->directory = rtrim($this->arguments[0], '/');
 			$this->documentationDirectory = $this->directory . '/Documentation';
+
+			if (! is_file($this->documentationDirectory . '/Index.rst')) {
+				$this->documentationDirectory = $this->directory;
+			}
 		}
 
 		if (isset($this->arguments['d']) || isset($this->arguments['dry-run'])) {
@@ -98,19 +104,19 @@ class ClientRender {
 		$files = array();
 
 		// Get all reST files
-		$directory = new RecursiveDirectoryIterator("$this->directory");
+		$directory = new \RecursiveDirectoryIterator($this->directory);
 		$filter = new DirectoryFilter($directory, '/^(?!\..*|_.*)/'); // Filter out folders
 		$filter = new FileFilter($filter, '/\.(?:rst)$/'); // Filter files
-		$iterator = new RecursiveIteratorIterator($filter);
+		$iterator = new \RecursiveIteratorIterator($filter);
 		foreach ($iterator as $key => $file) {
 			$files[] = $key;
 		}
 
 		// Get all images
-		$directory = new RecursiveDirectoryIterator(realpath("$this->directory/Documentation"));
+		$directory = new \RecursiveDirectoryIterator(realpath($this->documentationDirectory));
 		$filter = new DirectoryFilter($directory, '/^(?!\..*|_.*)/'); // Filter out folders
-		$filter = new FileFilter($filter, '/\.(?:jpg|gif|png|jpeg)$/'); // Filter files
-		$iterator = new RecursiveIteratorIterator($filter);
+		$filter = new FileFilter($filter, '/\.(?:jpg|gif|png||txt|jpeg)$/'); // Filter files
+		$iterator = new \RecursiveIteratorIterator($filter);
 		foreach ($iterator as $key => $file) {
 			$files[] = $key;
 		}
@@ -126,7 +132,7 @@ class ClientRender {
 	 * Create an archive
 	 *
 	 * @param $files
-	 * @throws Exception
+	 * @throws \Exception
 	 * @return array
 	 */
 	protected function makeArchive($files) {
@@ -134,10 +140,10 @@ class ClientRender {
 		Console::output("Generating zip file...");
 
 		// create object
-		$zip = new ZipArchive();
+		$zip = new \ZipArchive();
 
 		$tempFile = tempnam('/tmp', 't3')  . '.zip';
-		if (!$zip->open($tempFile, ZIPARCHIVE::OVERWRITE)) {
+		if (!$zip->open($tempFile, \ZIPARCHIVE::OVERWRITE)) {
 			die("Failed to create zip file" . PHP_EOL);
 
 		}
@@ -149,13 +155,13 @@ class ClientRender {
 				$relativePath = substr($parts[1], 1);
 				$result = $zip->addFile($absolutePath, $relativePath);
 				if (! $result) {
-					throw new Exception("Could not add file: $absolutePath");
+					throw new \Exception("Could not add file: $absolutePath");
 				}
 			}
 		}
 
 		// Test status
-		if (!$zip->status == ZIPARCHIVE::ER_OK) {
+		if (!$zip->status == \ZIPARCHIVE::ER_OK) {
 			echo "Failed to write files to zip" . PHP_EOL;
 		}
 		$zip->close();
@@ -178,7 +184,6 @@ class ClientRender {
 
 		$data = array();
 		$data['action'] = 'render';
-		$data['user_workspace'] = USER_WORKSPACE;
 		$data['doc_workspace'] = str_replace('.zip', '', $zipFile['name']);
 		$data['doc_name'] = $zipFile['name'];
 		$data['format'] = implode(',', $this->formats);
@@ -223,13 +228,14 @@ class ClientRender {
 		}
 
 		if (!is_dir($this->documentationDirectory)) {
-			$this->displayError("documentation folder does not exist! Are you sure it is a TYPO3 extension? Path wanted: \"" . $this->documentationDirectory . '"');
+			$this->displayError(sprintf('I haven\'t found an Index.rst at "%s"! Are you sure it is a TYPO3 package?', $this->documentationDirectory));
 		}
 	}
 
 	/**
 	 * Output a usage message on the console
 	 *
+	 * @param $message
 	 * @return void
 	 */
 	protected function displayError($message) {
@@ -255,7 +261,7 @@ Render documentation on-line
 Usage:
 	get-the-docs render PATH [OPTIONS]
 
-	where "PATH" points to TYPO3 extension
+	where "PATH" points to the root of a TYPO3 package. The path should contains a Documentation folder.
 
 Options:
 	--html                  Render HTML version (implicit option if no other format options given)

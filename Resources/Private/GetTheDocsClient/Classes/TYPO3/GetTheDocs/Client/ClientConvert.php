@@ -1,4 +1,5 @@
 <?php
+namespace TYPO3\GetTheDocs\Client;
 
 /**
  * Worker class to make the job done!
@@ -55,7 +56,6 @@ class ClientConvert {
 
 		$data = array();
 		$data['action'] = 'convert';
-		$data['user_workspace'] = USER_WORKSPACE;
 		$data['debug'] = $this->debug;
 		$data['api_version'] = API_VERSION;
 		$files = array();
@@ -68,7 +68,7 @@ class ClientConvert {
 		Console::output($content);
 		#$result = file_put_contents("$this->directory/$this->file", $content);
 		#if ($result === FALSE) {
-		#	throw new Exception("Exception: file '$this->file' was not written");
+		#	throw new \Exception("Exception: file '$this->file' was not written");
 		#}
 		#Console::output("File \"$this->file\" written");
 	}
@@ -87,6 +87,7 @@ class ClientConvert {
 	/**
 	 * Output a usage message on the console
 	 *
+	 * @param $message
 	 * @return void
 	 */
 	protected function displayError($message) {

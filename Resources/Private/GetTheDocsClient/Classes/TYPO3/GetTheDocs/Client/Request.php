@@ -1,4 +1,6 @@
 <?php
+namespace TYPO3\GetTheDocs\Client;
+
 /**
  * Request helper
  */
@@ -38,12 +40,12 @@ class Request {
 		$fp = fopen($url, 'rb', false, $ctx);
 
 		if (!$fp) {
-			throw new Exception("Problem with $url, $php_errormsg");
+			throw new \Exception("Problem with $url, $php_errormsg");
 		}
 
 		$response = @stream_get_contents($fp);
 		if ($response === false) {
-			throw new Exception("Problem reading data from $url, $php_errormsg");
+			throw new \Exception("Problem reading data from $url, $php_errormsg");
 		}
 		return $response;
 	}

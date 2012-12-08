@@ -6,13 +6,13 @@ class File {
 	 * Recursively remove directory
 	 *
 	 * @static
-	 * @param $dir
+	 * @param string $directory
 	 * @return void
 	 */
-	static public function removeDirectory($dir) {
+	static public function removeDirectory($directory) {
 
-		$command = "rm -rf $dir";
-		if (is_dir($dir)) {
+		$command = "rm -rf $directory";
+		if (is_dir($directory)) {
 			exec($command);
 		}
 		#foreach (glob($dir . '/*') as $file) {
