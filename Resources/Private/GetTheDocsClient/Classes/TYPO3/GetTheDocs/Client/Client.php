@@ -16,6 +16,10 @@ class Client {
 
 		if (count($arguments) <= 1 || $arguments[1] == 'help') {
 			$this->displayUsage();
+		} elseif (! in_array($arguments[1], array('convert', 'render', 'config'))) {
+			$message = sprintf('I don\'t know action "%s". Please refer to the help message', $arguments[1]);
+			print $message;
+			die();
 		}
 		else {
 			$action = $arguments[1];
@@ -43,13 +47,13 @@ EOF;
 	 * @return void
 	 */
 	public function displayUsage() {
+	#get-the-docs config     Download configuration for local rendering (Experimental!)
 		$usage = <<< EOF
 Toolbox for managing TYPO3 documentation
 
 Usage:
 	get-the-docs render     Render reST documentation remotely
 	get-the-docs convert    Convert legacy OpenOffice documentation to reST
-	get-the-docs config     Download configuration for local rendering (Experimental!)
 	get-the-docs help       Print this help
 
 Add option --help to get more usage of a particular action. E.g.

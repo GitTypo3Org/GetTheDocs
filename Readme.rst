@@ -42,6 +42,11 @@ Web server configuration
 	upload_max_filesize 20M
 
 
+Phar editing could be enabled
+
+	# na /etc/php5/cli/php.ini
+	phar.readonly = Off
+
 Apache security
 =========================
 
@@ -54,8 +59,36 @@ Avoid PHP file to be executed. Probably more security would be good to avoid Apa
         php_flag engine off
 </Directory>
 
-Testing resources
-========================
+Debug
+=====
 
-./get-the-docs.phar convert package:/GetTheDocs/Tests/Resources/manual.sxw
-./get-the-docs.phar render package:/GetTheDocs/Tests/Resources/TestingPackage
+::
+
+	# jump to the root directory
+	j GetTheDocs
+	cd Resources/Private/GetTheDocsClient/bin/
+	php get-the-docs.php
+
+
+Build a new Phar
+=================
+
+::
+
+	# jump to the root directory
+	j GetTheDocs
+
+	# Generate a new Phar into Build
+	php download.php
+
+	ls -l Build
+
+Feature Tests
+=============
+
+::
+
+	./Tests/feature-tests.sh
+
+	# To display the command
+	./Tests/feature-tests.sh --dry-run

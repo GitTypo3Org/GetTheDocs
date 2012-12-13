@@ -49,7 +49,8 @@ class ClientRender {
 		$this->arguments = Console::parseArgs($arguments);
 
 		if (! empty($this->arguments[0])) {
-			$this->directory = rtrim($this->arguments[0], '/');
+			$directory = rtrim($this->arguments[0], '/');
+			$this->directory = realpath(sprintf('%s/%s', $_SERVER['PWD'] . '/', $directory));
 			$this->documentationDirectory = $this->directory . '/Documentation';
 
 			if (! is_file($this->documentationDirectory . '/Index.rst')) {
@@ -122,9 +123,9 @@ class ClientRender {
 		}
 
 		// Add also ext_emconf.php to use as source of information on the server
-		if (is_file("$this->directory/ext_emconf.php")) {
-			$files[] = "$this->directory/ext_emconf.php";
-		}
+		#if (is_file("$this->directory/ext_emconf.php")) {
+		#	$files[] = "$this->directory/ext_emconf.php";
+		#}
 		return $files;
 	}
 
@@ -261,7 +262,7 @@ Render documentation on-line
 Usage:
 	get-the-docs render PATH [OPTIONS]
 
-	where "PATH" points to the root of a TYPO3 package. The path should contains a Documentation folder.
+	where "PATH" points to a TYPO3 package. It could also points directly to the Documentation folder.
 
 Options:
 	--html                  Render HTML version (implicit option if no other format options given)
