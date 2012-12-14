@@ -32,21 +32,24 @@
 </p>
 <p>
 	 In a nutshell:
+</p>
 
-	<pre>
+<pre>
+
+	# Fetch a document to render
+	$ git clone git://git.typo3.org/Documentation/TYPO3/Book/ExtbaseFluid.git
+
+	# Download the utility script
 	$ curl -s http://docs.typo3.org/getthedocs/download.php > get-the-docs.phar
 	$ chmod 755 get-the-docs.phar
 	$ ./get-the-docs.phar
-	</pre>
 
-	You will be able to generate the docs in one command.
+	# Render it
+	$ ./get-the-docs.phar render ExtbaseFluid
 
-	<pre>
-	$ get-the-docs.phar render PATH/TO/EXTENSION
-	</pre>
+</pre>
 
-	<a style="font-weight: bold" href="service-cli.html">read more</a>...
-</p>
+<a style="font-weight: bold" href="service-cli.html">read more</a>...
 
 
 <!-- ********************** -->

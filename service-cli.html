@@ -25,10 +25,10 @@ This script will help you in generating TYPO3 documentation from the command lin
 	Download <a href="http://docs.typo3.org/getthedocs/download.php">the script</a> somewhere in your system. On a *nix system, it
 	can be achieved from the command line with:
 <pre>
-	cd PATH
-	curl -s http://docs.typo3.org/getthedocs/download.php > get-the-docs.phar
-	chmod 755 get-the-docs.phar
-	./get-the-docs.phar
+	$ cd PATH
+	$ curl -s http://docs.typo3.org/getthedocs/download.php > get-the-docs.phar
+	$ chmod 755 get-the-docs.phar
+	$ ./get-the-docs.phar
 </pre>
 <p>
 	<span style="text-decoration: underline">Tip</span>: putting the script somewhere in your PATH (e.g /usr/bin/) would make the
@@ -58,6 +58,41 @@ This script will help you in generating TYPO3 documentation from the command lin
 		get-the-docs.phar config     Download configuration for local rendering (Working but still missing features...)
 		get-the-docs.phar help       Print this help
 </pre>
+
+
+<h3>Example of rendering a document</h3>
+
+<p>
+	Assuming get-the-docs.phar is installed
+</p>
+
+<pre>
+
+	# Fetch a document to render
+	$ git clone git://git.typo3.org/Documentation/TYPO3/Book/ExtbaseFluid.git
+
+	# Render it
+	$ ./get-the-docs.phar render ExtbaseFluid
+
+	# Render it with more format than HTML
+	$ ./get-the-docs.phar render --html --json --gettext --epub --pdf --zip  ExtbaseFluid
+
+</pre>
+
+
+<h3>Example of converting a legacy manual.sxw document</h3>
+
+<p>
+	Assuming get-the-docs.phar is installed, we want to convert a legacy manual.sxw file to reST format.
+</p>
+
+<pre>
+
+	# Render it
+	$ ./get-the-docs.phar convert PATH/TO/manual.sxw
+
+</pre>
+
 <h3>Source code</h3>
 
 <p>
